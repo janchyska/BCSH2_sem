@@ -36,3 +36,9 @@ H:\GIT\BCSH2_Sem_prace_Chyska\bin\Debug\net7.0\runtimes\win-x86\native\sni.dll
 H:\GIT\BCSH2_Sem_prace_Chyska\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 H:\GIT\BCSH2_Sem_prace_Chyska\bin\Debug\net7.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 H:\GIT\BCSH2_Sem_prace_Chyska\obj\Debug\net7.0\BCSH2_Sem_prace_Chyska.csproj.CopyComplete
+H:\GIT\BCSH2_Sem_prace_Chyska\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
+H:\GIT\BCSH2_Sem_prace_Chyska\bin\Debug\net7.0\System.Diagnostics.EventLog.dll
+H:\GIT\BCSH2_Sem_prace_Chyska\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
+H:\GIT\BCSH2_Sem_prace_Chyska\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Diagnostics.EventLog.Messages.dll
+H:\GIT\BCSH2_Sem_prace_Chyska\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Diagnostics.EventLog.dll
+H:\GIT\BCSH2_Sem_prace_Chyska\bin\Debug\net7.0\Project.mdf

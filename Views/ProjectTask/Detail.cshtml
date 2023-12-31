@@ -1,0 +1,38 @@
+﻿@model ProjectTask
+
+<h1>Detail úkolu</h1>
+
+<table class="table">
+    <tr>
+        <th>ID:</th>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <th>Název:</th>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <th>Popis:</th>
+        <td>@Model.Description</td>
+    </tr>
+    <tr>
+        <th>Priorita:</th>
+        <td>@Model.Priority?.Name</td>
+    </tr>
+    <tr>
+        <th>Stav:</th>
+        <td>@Model.Status?.Name</td>
+    </tr>
+    <tr>
+        <th>Deadline:</th>
+        <td>@(Model.Deadline.HasValue ? Model.Deadline.Value.ToString("dd.MM.yyyy") : "Není stanoveno")</td>
+    </tr>
+    <tr>
+        <th>Projekt:</th>
+        <td>@Model.Project.Name</td>
+    </tr>
+</table>
+
+<a asp-controller="ProjectTask" asp-action="EditTask" asp-route-id="@Model.Id" asp-route-ProjectID = "@Model.Project.Id">Upravit úkol</a> |
+<a asp-controller="Project" asp-action="DeleteTask" asp-route-id="@Model.Id" asp-route-projectID = "@Model.Project.Id">Odstranit úkol</a> |
+<a asp-controller="Project" asp-action="Details" asp-route-id="@Model.Project.Id">Zpět na seznam úkolů</a>

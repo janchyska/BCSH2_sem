@@ -1,7 +1,77 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+﻿@model List<Project>
+
+<h1>Seznam projektů</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Název projektu</th>
+            <th>Popis projektu</th>
+            <th>Vedoucí projektu</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            @foreach (var project in Model)
+            {
+                <tr>
+                    <td>@project.Id</td>
+                    <td>
+                        <a asp-controller="Project" asp-action="Details" asp-route-id="@project.Id">@project.Name</a>
+                    </td>
+                    <td>@project.Description</td>
+                    <td>
+                        <!-- tasks -->
+                    </td>
+                    <td>@project.Owner</td>
+                    <td>
+                        <a asp-controller="Home" asp-action="DeleteProject" asp-route-id="@project.Id">Odstranit projekt</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<br/>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createProjectModal">
+    Vytvořit nový projekt
+</button>
+<div class="modal fade" id="createProjectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Vytvořit nový projekt</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <form asp-controller="Home" asp-action="AddProject" method="post">
+                    <div class="form-group">
+                        <label for="projectName">Název projektu</label>
+                        <input type="text" class="form-control" id="projectName" name="Name" required>
+                    </div>           
+                    <div class="form-group">
+                        <label for="projectDescription">Popis</label>
+                        <input type="text" class="form-control" id="projectDescription" name="Description" >
+                    </div>      
+                    <div class="form-group">
+                        <label for="projectOwner">Vedoucí projektu</label>
+                        <input type="text" class="form-control" id="projectOwner" name="Owner">
+                    </div>       
+                    <br/>
+                    <button type="submit" class="btn btn-primary">Vytvořit </button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+<br/>
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" style="margin-top:10px">
+        @ViewBag.ErrorMessage
+    </div>
+}
+

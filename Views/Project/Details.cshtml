@@ -1,0 +1,110 @@
+﻿@model ProjectProjectTaskModel
+
+<h1>Projekt @Model.Project.Name</h1>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <td>@Model.Project.Id</td>
+    </tr>
+    <tr>
+        <th>Název</th>
+        <td>@Model.Project.Name</td>
+    </tr>
+    <tr>
+        <th>Popis</th>
+        <td>@Model.Project.Description</td>
+    </tr>
+    <tr>
+        <th class="ukoly-nadpis">Úkoly</th>
+    </tr>
+    <tr>
+        <th>Název</th>
+        <th>Popis</th>
+        <th>Status</th>
+        <th>Priorita</th>
+        <th>Deadline</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @if (Model.ProjectTasks.Count > 0)
+    {
+        @foreach (var task in Model.ProjectTasks)
+        {
+            <tr>
+                <td>@task.Name</td>
+                <td>@task.Description</td>
+                <td>
+                    @if (task.Status != null)
+                    {
+                        @task.Status.Name
+                    }
+                </td>
+                <td>
+                    @if (task.Priority != null)
+                    {
+                        @task.Priority.Name
+                    }
+                </td>
+                <td>@task.Deadline </td>
+                <td><a asp-controller="ProjectTask" asp-action="Detail" asp-route-id="@task.Id" asp-route-projectID = "@task.Project.Id"> Detail úkolu </a></td>
+                <td>  <a asp-controller="Project" asp-action="DeleteTask" asp-route-id="@task.Id" asp-route-projectID="@task.Project.Id"> Odebrat úkol</a></td>
+            </tr>
+        }
+    }
+</table>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createTaskModal">
+    Vytvořit nový úkol
+</button>
+<div class="modal fade" id="createTaskModal" tabindex="-1" role="dialog" aria-labelledby="createTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createTaskModalLabel">Vytvořit nový úkol</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Project" asp-action="AddTask" method="post">
+                    <div class="form-group">
+                        <label for="taskName">Název úkolu</label>
+                        <input type="text" class="form-control" id="taskName" name="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskDescription">Popis úkolu</label>
+                        <input type="text" class="form-control" id="taskDescription" name="Description">
+                    </div>
+                    <div class="form-group">
+                        <label for="taskPriority">Priorita úkolu</label>
+                        <select class="form-control" id="taskPriority" name="SelectedPriorityId">
+                            @foreach (var priority in Model.Priorities)
+                            {
+                                <option value="@priority.Id">@priority.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="taskStatus">Status úkolu</label>
+                        <select class="form-control" id="taskStatus" name="SelectedStatusId">
+                            @foreach (var status in Model.Statuses)
+                            {
+                                <option value="@status.Id">@status.Name</option>
+                            }
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="deadLineDate">Deadline</label>
+                        <input type="datetime-local" class="form-control" id="deadLineDate" name="Deadline" />
+                    </div>
+                    <input type="hidden" id="projectId" name="projectID" value="@Model.Project.Id" />
+                    <br />
+                    <button type="submit" class="btn btn-primary">Vytvořit úkol</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

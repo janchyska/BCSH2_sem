@@ -1,3 +1,4 @@
+using BCSH2_Sem_prace_Chyska.Controllers;
 using BCSH2_Sem_prace_Chyska.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,5 +26,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 app.Run();
